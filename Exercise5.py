@@ -7,12 +7,12 @@
 ## It should have a new attribute root and a method depth that calculates the depth of the tree. This method 
 ## can use the shortest path method.
 
-from ManualSymMatrix import SymMatrix
+from GraphVis import SymMatrix, VisualGraph
 from math import inf
 
 def main():
     # Networks with 6 nodes
-    sm = SymMatrix(6)
+    sm = VisualGraph(6)
 
     # Input element into list to convert to graph matrix
     '''
@@ -30,15 +30,16 @@ def main():
     sm[1,0], sm[1,1] = 2, 0
     sm[2,0], sm[2,1], sm[2,2] = 5, 3, 0
     sm[3,0], sm[3,1], sm[3,2], sm[3,3] = 1, 2, 3 ,0
-    sm[4,0], sm[4,1], sm[4,2], sm[4,3], sm[4,4] = inf, inf, 1, 1, 0
-    sm[5,0], sm[5,1], sm[5,2], sm[5,3], sm[5,4], sm[5,5] = inf, inf, 5, inf, 2, 0
+    sm[4,0], sm[4,1], sm[4,2], sm[4,3], sm[4,4] = 0, 0, 1, 1, 0
+    sm[5,0], sm[5,1], sm[5,2], sm[5,3], sm[5,4], sm[5,5] = 0, 0, 5, 0, 2, 0
 
-    print('List of important nodes link is \n', sm.data)
-    print('Graph matrix is \n', sm.matrix)
+    print('List of important nodes link is \n', sm._data)
+    print('Graph matrix is \n', sm._matrix)
 
-    graphMatrix = sm.matrix
-    
+    graphMatrix = sm._matrix
 
+    sm._dijkstra(sm._matrix, 0)
+    sm._draw_graph(sm._matrix)
 
 
 if __name__ == '__main__':
